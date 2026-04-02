@@ -1,0 +1,58 @@
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bondo Bachir | Portfolio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <h1>BONDO BACHIR</h1>
+  <button id="langToggle">FR / EN</button>
+</header>
+
+<section class="hero">
+  <h2 data-en="Mechanical Engineering Student" data-fr="Étudiant en Génie Mécanique">
+    Mechanical Engineering Student
+  </h2>
+</section>
+
+<section class="projects">
+
+  <div class="project" onclick="openModal('cnc')">
+    <img src="assets/images/piston1.jpg">
+    <h3>CNC + Fusion 360</h3>
+  </div>
+
+  <div class="project" onclick="openModal('printing')">
+    <img src="assets/images/printing2.jpg">
+    <h3>3D Printing & Robotics</h3>
+  </div>
+
+  <div class="project" onclick="openModal('hammer')">
+    <img src="assets/images/hammer-head-1.jpg">
+    <h3>Hammer Manufacturing</h3>
+  </div>
+
+</section>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <span onclick="closeModal()">×</span>
+  <div id="modalContent"></div>
+</div>
+
+<section class="contact">
+  <h2>Contact</h2>
+  <p>Email: bondobachir@gmail.com</p>
+  <p>Phone: +1 613 606 7984</p>
+  <a href="https://www.linkedin.com/in/mohammad-bachir-bondo-78308535a" target="_blank">LinkedIn</a>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html
