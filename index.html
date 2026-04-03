@@ -1,328 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammad Bachir Bondo | Portfolio Expert</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;700&display=swap');
-
-        :root {
-            --accent: #00f0ff;
-            --bg: #050505;
-            --glass: rgba(255, 255, 255, 0.03);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
-
-        body {
-            background-color: var(--bg);
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* --- CURSEUR DYNAMIQUE --- */
-        #c-poly {
-            position: fixed;
-            width: 30px; height: 30px;
-            border: 1px solid var(--accent);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease-out, width 0.3s, height 0.3s, background 0.3s;
-            transform: translate(-50%, -50%);
-        }
-        #c-dot {
-            position: fixed;
-            width: 6px; height: 6px;
-            background: var(--accent);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-        }
-
-        /* --- BACKGROUND IMMERSIF --- */
-        #dynamic-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -2;
-            background-size: cover;
-            background-position: center;
-            transition: background-image 1.2s cubic-bezier(0.4, 0, 0.2, 1), filter 1s;
-            filter: brightness(0.2) grayscale(0.5);
-        }
-        .overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at center, transparent 20%, var(--bg) 100%);
-        }
-
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 30px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-        }
-        .logo { font-family: 'Syncopate', sans-serif; font-weight: 700; letter-spacing: 5px; font-size: 1.2rem; }
-        .lang-btn {
-            background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 2px;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 2px;
-            backdrop-filter: blur(10px);
-            transition: 0.4s;
-        }
-        .lang-btn:hover { background: var(--accent); color: #000; box-shadow: 0 0 20px var(--accent); }
-
-        /* --- SECTIONS --- */
-        section {
-            min-height: 100vh;
-            padding: 150px 10%;
-            display: flex;
-            align-items: center;
-            opacity: 0;
-            transform: translateY(100px);
-            transition: 1s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        section.active { opacity: 1; transform: translateY(0); }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .text-side h3 {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 3.5rem;
-            margin-bottom: 25px;
-            line-height: 1.1;
-            text-transform: uppercase;
-        }
-        .text-side p { font-size: 1.1rem; color: #aaa; margin-bottom: 30px; max-width: 500px; }
-        
-        .tag {
-            display: inline-block;
-            padding: 5px 15px;
-            background: rgba(0, 240, 255, 0.1);
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            border-radius: 3px;
-        }
-
-        /* --- MEDIA HANDLER --- */
-        .media-side { position: relative; }
-        .media-side img, .media-side video {
-            width: 100%;
-            border-radius: 4px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-            transition: 0.5s;
-        }
-        .media-side:hover img, .media-side:hover video { transform: scale(1.02) translateY(-10px); }
-
-        .dual-media { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-        /* --- CONTACT FOOTER --- */
-        .footer {
-            padding: 100px 10%;
-            background: #000;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-        .footer h2 { font-family: 'Syncopate', sans-serif; font-size: 3rem; margin-bottom: 40px; }
-        .contact-info { font-size: 1.5rem; color: var(--accent); margin-bottom: 30px; }
-        .socials a { color: white; font-size: 2.5rem; margin: 0 20px; transition: 0.3s; }
-        .socials a:hover { color: var(--accent); transform: translateY(-5px); }
-
-        /* --- RÉGLAGES BILINGUES --- */
-        [data-en] { display: none; }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 1024px) {
-            .content-grid { grid-template-columns: 1fr; }
-            .text-side h3 { font-size: 2.5rem; }
-            nav { padding: 20px; }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bondo Mohammad Bachir — Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-
-    <div id="c-poly"></div>
-    <div id="c-dot"></div>
-    <div id="dynamic-bg"></div>
-    <div class="overlay"></div>
-
-    <nav>
-        <div class="logo">MB.BONDO</div>
-        <button class="lang-btn" onclick="toggleLang()">English</button>
+<body data-lang="fr">
+  <header class="site-header">
+    <div class="brand">
+      <h1 class="name">Bondo Mohammad Bachir</h1>
+      <p class="subtitle">Mechanical Engineering Technology — Collège La Cité</p>
+    </div>
+    <nav class="top-controls">
+      <button id="langToggle" class="btn">English</button>
+      <a id="linkedinBtn" class="btn ghost" href="https://www.linkedin.com/in/mohammad-bachir-bondo-78308535a" target="_blank" rel="noopener">LinkedIn</a>
     </nav>
+  </header>
 
-    <section class="active" data-bg="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070">
-        <div class="text-side">
-            <span class="tag">TECHNOLOGIE DU GÉNIE MÉCANIQUE</span>
-            <h3 data-fr="Mohammad Bachir Bondo">Mohammad Bachir Bondo</h3>
-            <h3 data-en="Mohammad Bachir Bondo">Mohammad Bachir Bondo</h3>
-            <p data-fr="Étudiant passionné au Collège La Cité. Spécialiste de la précision, de l'usinage conventionnel et numérique.">Mechanical Engineering Student at Collège La Cité. Specialist in precision, conventional and CNC machining.</p>
-        </div>
+  <main id="main">
+    <section id="hero" class="panel hero-panel" data-bg="metal">
+      <div class="hero-inner">
+        <h2 class="hero-title" data-i18n="hero_title">Portfolio — Projets de fabrication & CAO</h2>
+        <p class="hero-lead" data-i18n="hero_lead">Go crazy — découvrez des projets réels, des vidéos CNC et des modèles 3D.</p>
+        <a href="#projects" class="scroll-down" aria-label="Voir les projets">↓</a>
+      </div>
     </section>
 
-    <section id="p1" data-bg="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=2070">
-        <div class="content-grid">
-            <div class="text-side">
-                <span class="tag">HIVER 2025</span>
-                <h3 data-fr="Plaque de taraudage" data-en="Threading Plate">Plaque de taraudage</h3>
-                <p data-fr="Fabrication d'une plaque en acier avec vérification rigoureuse des tolérances. Développement de l'exactitude dimensionnelle." 
-                   data-en="Steel plate manufacturing with rigorous tolerance verification. Development of dimensional accuracy.">
-                   Fabrication d'une plaque en acier avec vérification rigoureuse des tolérances. Développement de l'exactitude dimensionnelle.
-                </p>
-                <div class="tech">SolidWorks • Perceuse • Taraudage</div>
-            </div>
-            <div class="media-side">
-                <img src="image1.png" alt="Projet 1">
-            </div>
+    <section id="projects" class="panel projects-panel" data-bg="workshop">
+      <div class="container">
+        <h3 data-i18n="projects_title">Projets</h3>
+        <div class="projects-grid" id="projectsGrid">
+          <!-- Cartes générées par script -->
         </div>
+      </div>
     </section>
 
-    <section id="p2" data-bg="https://images.unsplash.com/photo-1530124560676-586cad3db0f0?q=80&w=2070">
-        <div class="content-grid">
-            <div class="media-side">
-                <img src="image2.png" alt="Corps Marteau">
-            </div>
-            <div class="text-side">
-                <span class="tag">USINAGE CONVENTIONNEL</span>
-                <h3 data-fr="Corps du marteau" data-en="Hammer Body">Corps du marteau</h3>
-                <p data-fr="Usinage au tour : surfaçage, chariotage et rainurage. Focus sur la finition de surface et le respect des normes." 
-                   data-en="Lathe machining: facing, turning, and grooving. Focus on surface finish and standards compliance.">
-                </p>
-            </div>
+    <section id="cnc-section" class="panel cnc-panel" data-bg="cnc">
+      <div class="container">
+        <h3 data-i18n="cnc_title">CNC & Programmation</h3>
+        <div class="media-row">
+          <div class="video-card">
+            <video id="videoCNC" controls playsinline preload="metadata">
+              <source src="cnc.mov" type="video/quicktime">
+              Votre navigateur ne supporte pas la vidéo.
+            </video>
+            <p class="caption" data-i18n="cnc_caption">Vidéo machine usinée</p>
+          </div>
+          <div class="video-card">
+            <video id="videoCNC2" controls playsinline preload="metadata">
+              <source src="cnc2.mov" type="video/quicktime">
+              Votre navigateur ne supporte pas la vidéo.
+            </video>
+            <p class="caption" data-i18n="cnc2_caption">Programmation Fusion 360</p>
+          </div>
         </div>
+      </div>
     </section>
 
-    <section id="p3" data-bg="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=2070">
-        <div class="content-grid">
-            <div class="text-side">
-                <span class="tag">FRAISAGE</span>
-                <h3 data-fr="Tête du marteau" data-en="Hammer Head">Tête du marteau</h3>
-                <p data-fr="Usinage complet à la fraiseuse. Maîtrise du contournage et de la stratégie de parcours d'outils." 
-                   data-en="Full milling machining. Mastery of contouring and tool path strategy.">
-                </p>
-            </div>
-            <div class="media-side">
-                <img src="image3.png" alt="Tête Marteau">
-            </div>
-        </div>
+    <section id="additive" class="panel additive-panel" data-bg="3dprint">
+      <div class="container">
+        <h3 data-i18n="additive_title">Impression 3D & CAO</h3>
+        <div class="project-detail" id="additiveDetail"></div>
+      </div>
     </section>
 
-    <section id="p4" data-bg="https://images.unsplash.com/photo-1565034946487-0d715132e53f?q=80&w=2070">
-        <div class="content-grid">
-            <div class="media-side dual-media">
-                <video src="cnc2.mp4" autoplay loop muted playsinline></video>
-                <video src="cnc.mp4" autoplay loop muted playsinline></video>
-            </div>
-            <div class="text-side">
-                <span class="tag">PROGRAMMATION NUMÉRIQUE</span>
-                <h3 data-fr="Usinage CNC & Fusion 360" data-en="CNC & Fusion 360">Usinage CNC & Fusion 360</h3>
-                <p data-fr="Du code à la pièce : Programmation complète sur Fusion 360 et exécution sur machine CNC." 
-                   data-en="From code to part: Complete programming on Fusion 360 and execution on CNC machine.">
-                </p>
-            </div>
-        </div>
+    <section id="contact" class="panel contact-panel" data-bg="paper">
+      <div class="container contact-inner">
+        <h3 data-i18n="contact_title">Contact</h3>
+        <p><strong>Email:</strong> <a href="mailto:bondobachir@gmail.com">bondobachir@gmail.com</a></p>
+        <p><strong>Téléphone:</strong> <a href="tel:+16136067984">+1 613 606 7984</a></p>
+      </div>
     </section>
+  </main>
 
-    <section id="p5" data-bg="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=2070">
-        <div class="content-grid">
-            <div class="text-side">
-                <span class="tag">CAO AVANCÉE</span>
-                <h3 data-fr="Conception de Drone" data-en="Drone Design">Conception de Drone</h3>
-                <p data-fr="Modélisation complète pour impression 3D (FDM). Optimisation des structures de support et de l'aérodynamisme." 
-                   data-en="Full modeling for 3D printing (FDM). Optimization of support structures and aerodynamics.">
-                </p>
-            </div>
-            <div class="media-side dual-media">
-                <img src="image10.png" alt="Drone 1">
-                <img src="image11.png" alt="Drone 2">
-                <img src="image12.png" alt="Drone 3" style="grid-column: span 2;">
-            </div>
-        </div>
-    </section>
+  <div id="projectModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button id="modalClose" class="modal-close">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
 
-    <section id="p6" data-bg="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070">
-        <div class="content-grid">
-            <div class="media-side">
-                <img src="image13.png" alt="Bras Robot">
-            </div>
-            <div class="text-side">
-                <span class="tag">ROBOTIQUE</span>
-                <h3 data-fr="Bras MG996R" data-en="Robotic Arm MG996R">Bras MG996R</h3>
-                <p data-fr="Intégration électromécanique d'un bras robotique multi-axes. Gestion des tolérances pour les articulations." 
-                   data-en="Electromechanical integration of a multi-axis robotic arm. Tolerance management for joints.">
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <h2 data-fr="Collaborons ensemble" data-en="Let's Collaborate">Collaborons ensemble</h2>
-        <div class="contact-info">
-            <p>bondobachir@gmail.com</p>
-            <p>+1 613 606 7984</p>
-        </div>
-        <div class="socials">
-            <a href="https://www.linkedin.com/in/mohammad-bachir-bondo-78308535a" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="mailto:bondobachir@gmail.com"><i class="fas fa-envelope"></i></a>
-        </div>
-    </footer>
-
-    <script>
-        // CURSEUR CUSTOM
-        const poly = document.getElementById('c-poly');
-        const dot = document.getElementById('c-dot');
-        document.addEventListener('mousemove', (e) => {
-            poly.style.left = e.clientX + 'px';
-            poly.style.top = e.clientY + 'px';
-            dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
-        });
-
-        // BILINGUE
-        let lang = 'fr';
-        function toggleLang() {
-            lang = lang === 'fr' ? 'en' : 'fr';
-            document.querySelectorAll('[data-fr]').forEach(el => el.style.display = lang === 'fr' ? 'block' : 'none');
-            document.querySelectorAll('[data-en]').forEach(el => el.style.display = lang === 'en' ? 'block' : 'none');
-            document.querySelector('.lang-btn').innerText = lang === 'fr' ? 'English' : 'Français';
-        }
-
-        // BACKGROUND DYNAMIQUE AU SCROLL
-        const bg = document.getElementById('dynamic-bg');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    const imgUrl = entry.target.getAttribute('data-bg');
-                    if (imgUrl) bg.style.backgroundImage = `url('${imgUrl}')`;
-                }
-            });
-        }, { threshold: 0.4 });
-
-        document.querySelectorAll('section').forEach(section => observer.observe(section));
-    </script>
+  <script src="script.js"></script>
 </body>
 </html>
