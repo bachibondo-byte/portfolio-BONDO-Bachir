@@ -78,3 +78,38 @@ body{
   .video-card video{height:160px}
   .site-header{padding:8px}
 }
+/* --- Ajouts pep / animations --- */
+:root{ --accent-glow: rgba(0,209,255,0.18); --accent-strong:#00d1ff; }
+
+.project-card{
+  border: 1px solid rgba(255,255,255,0.03);
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+  transition: transform 360ms cubic-bezier(.2,.9,.2,1), box-shadow 360ms, border-color 360ms;
+}
+.project-card:hover{
+  box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 18px var(--accent-glow);
+  border-color: rgba(0,209,255,0.18);
+}
+
+/* modal layout */
+.modal-content{padding:20px; border-radius:14px; overflow:visible}
+.modal-grid{display:flex;gap:18px;align-items:flex-start}
+.modal-left img{width:320px;height:auto;border-radius:10px;object-fit:cover;box-shadow:0 12px 30px rgba(0,0,0,0.6)}
+.modal-right h2{margin:0 0 6px;outline:none}
+.skill-list, .file-list{margin:8px 0 0 18px;color:var(--muted)}
+.muted{color:var(--muted)}
+
+/* video description */
+.video-desc{margin-top:8px;font-size:0.92rem;color:var(--muted)}
+
+/* subtle background transition when section changes */
+body.bg-transition{transition:background 900ms ease}
+body[data-active-bg="cnc"]{box-shadow:inset 0 0 120px rgba(0,0,0,0.45)}
+body[data-active-bg="3dprint"]{box-shadow:inset 0 0 120px rgba(0,10,20,0.45)}
+body[data-active-bg="workshop"]{box-shadow:inset 0 0 120px rgba(10,0,0,0.35)}
+
+/* small responsive modal stack */
+@media (max-width:900px){
+  .modal-grid{flex-direction:column}
+  .modal-left img{width:100%}
+}
