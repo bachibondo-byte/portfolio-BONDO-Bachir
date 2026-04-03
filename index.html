@@ -1,58 +1,399 @@
-}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bondo Bachir | Portfolio</title>
-<link rel="stylesheet" href="style.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bondo Mohammad Bachir | Portfolio</title>
+    <style>
+        /* --- STYLES GLOBAUX & POLICES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none; /* Cache le curseur normal pour notre curseur custom */
+        }
 
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- CURSEUR CUSTOM --- */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00f0ff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        .cursor-trail {
+            width: 8px;
+            height: 8px;
+            background-color: #00f0ff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: 0.1s ease-out;
+            box-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+        }
+
+        /* --- HERO SECTION (Accueil) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+            background-attachment: fixed; /* Effet Parallaxe */
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #00f0ff, #ff003c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: #ddd;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(0, 240, 255, 0.2); }
+            to { text-shadow: 0 0 30px rgba(0, 240, 255, 0.6), 0 0 10px rgba(255, 0, 60, 0.6); }
+        }
+
+        /* --- SECTIONS PROJETS (Parallaxe) --- */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem 2rem;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+
+        /* Les différents fonds d'écran selon la machine */
+        .bg-drill { background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1581092335397-9583eb92d232?q=80&w=2070&auto=format&fit=crop'); }
+        .bg-lathe { background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1565439387498-831776510619?q=80&w=2070&auto=format&fit=crop'); }
+        .bg-milling { background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?q=80&w=2070&auto=format&fit=crop'); }
+        .bg-3d { background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?q=80&w=2070&auto=format&fit=crop'); }
+        .bg-robot { background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2070&auto=format&fit=crop'); }
+
+        /* --- CARTES GLASSMORPHISM (Effet Verre) --- */
+        .glass-card {
+            background: rgba(25, 25, 25, 0.4);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 1200px;
+            width: 100%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+        }
+
+        .glass-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+        }
+
+        /* Inverse l'ordre pour une section sur deux pour le style */
+        .reverse-layout {
+            grid-template-columns: 1fr 1fr;
+        }
+        .reverse-layout .content {
+            order: 2;
+        }
+        .reverse-layout .media {
+            order: 1;
+        }
+
+        /* --- TYPOGRAPHIE DES CARTES --- */
+        .project-date {
+            color: #00f0ff;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .glass-card h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .glass-card p {
+            color: #cccccc;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+
+        .tool-badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: 0.3s;
+        }
+
+        .tool-badge:hover {
+            background: #00f0ff;
+            color: #000;
+            border-color: #00f0ff;
+        }
+
+        /* --- IMAGES & VIDEOS --- */
+        .media {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .media img, .media video {
+            width: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.5s;
+        }
+
+        .media img:hover, .media video:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* --- RESPONSIVE DESIGN (Pour téléphone) --- */
+        @media (max-width: 900px) {
+            .glass-card, .reverse-layout {
+                grid-template-columns: 1fr;
+            }
+            .reverse-layout .content { order: 1; }
+            .reverse-layout .media { order: 2; }
+            .hero h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
 <body>
 
-<header>
-  <h1>BONDO BACHIR</h1>
-  <button id="langToggle">FR / EN</button>
-</header>
+    <div class="cursor"></div>
+    <div class="cursor-trail"></div>
 
-<section class="hero">
-  <h2 data-en="Mechanical Engineering Student" data-fr="Étudiant en Génie Mécanique">
-    Mechanical Engineering Student
-  </h2>
-</section>
+    <header class="hero">
+        <h1>Bondo Mohammad Bachir</h1>
+        <h2>Étudiant en Technologie du Génie Mécanique — Collège La Cité</h2>
+    </header>
 
-<section class="projects">
+    <section class="section bg-drill">
+        <div class="glass-card scroll-reveal">
+            <div class="content">
+                <div class="project-date">Hiver 2025</div>
+                <h3>Plaque de Taraudage</h3>
+                <p>Fabrication d'une plaque de taraudage en acier à l'aide d'une perceuse à colonne, d'un taraudage manuel et vérification des tolérances. Ce projet m'a aidé à développer des compétences en usinage de précision et une grande attention à l'exactitude dimensionnelle.</p>
+                <div class="tools">
+                    <span class="tool-badge">SolidWorks</span>
+                    <span class="tool-badge">Perceuse à Colonne</span>
+                    <span class="tool-badge">Taraudage Manuel</span>
+                </div>
+            </div>
+            <div class="media">
+                <img src="image1.png" alt="Plaque de taraudage">
+            </div>
+        </div>
+    </section>
 
-  <div class="project" onclick="openModal('cnc')">
-    <img src="assets/images/piston1.jpg">
-    <h3>CNC + Fusion 360</h3>
-  </div>
+    <section class="section bg-lathe">
+        <div class="glass-card reverse-layout scroll-reveal">
+            <div class="content">
+                <div class="project-date">Hiver 2025</div>
+                <h3>Fabrication d'un Marteau Complet</h3>
+                <p><strong>Corps du marteau :</strong> Usinage au tour à partir de matière brute (surfaçage, chariotage, rainurage). Renforcement des techniques de finition et respect des normes de sécurité.</p>
+                <p><strong>Tête du marteau :</strong> Entièrement usinée à la fraiseuse. Le processus impliquait le surfaçage, le contournage et le contrôle précis de la profondeur. Excellent exercice pour maîtriser la stratégie des parcours d'outils et l'alignement des montages.</p>
+                <div class="tools">
+                    <span class="tool-badge">Tour Conventionnel</span>
+                    <span class="tool-badge">Fraiseuse</span>
+                    <span class="tool-badge">Outils de mesure</span>
+                </div>
+            </div>
+            <div class="media grid-2">
+                <img src="image2.png" alt="Corps du marteau">
+                <img src="image3.png" alt="Tête du marteau">
+            </div>
+        </div>
+    </section>
 
-  <div class="project" onclick="openModal('printing')">
-    <img src="assets/images/printing2.jpg">
-    <h3>3D Printing & Robotics</h3>
-  </div>
+    <section class="section bg-lathe">
+        <div class="glass-card scroll-reveal">
+            <div class="content">
+                <div class="project-date">Hiver 2025</div>
+                <h3>Pièce de Tournage Pratique</h3>
+                <p>Usinage d'une pièce cylindrique complexe entièrement sur un tour conventionnel. Un travail minutieux sur les diamètres, les épaulements et la précision des ajustements.</p>
+                <div class="tools">
+                    <span class="tool-badge">Tour Conventionnel</span>
+                    <span class="tool-badge">Lecture de plans</span>
+                </div>
+            </div>
+            <div class="media">
+                <img src="image4.png" alt="Pièce de tournage">
+            </div>
+        </div>
+    </section>
 
-  <div class="project" onclick="openModal('hammer')">
-    <img src="assets/images/hammer-head-1.jpg">
-    <h3>Hammer Manufacturing</h3>
-  </div>
+    <section class="section bg-milling">
+        <div class="glass-card reverse-layout scroll-reveal">
+            <div class="content">
+                <div class="project-date">Usinage Avancé</div>
+                <h3>Programmation & Usinage CNC</h3>
+                <p>Découvre l'envers du décor ! D'un côté, la programmation rigoureuse du parcours d'outil réalisée sous <strong>Fusion 360</strong>. De l'autre, la machine en pleine action, transformant le code numérique en une pièce physique avec une précision chirurgicale.</p>
+                <div class="tools">
+                    <span class="tool-badge">Machine CNC</span>
+                    <span class="tool-badge">Fusion 360</span>
+                    <span class="tool-badge">G-Code</span>
+                </div>
+            </div>
+            <div class="media grid-2">
+                <video src="cnc2.mp4" autoplay loop muted playsinline title="Programmation sur Fusion 360"></video>
+                <video src="cnc.mp4" autoplay loop muted playsinline title="Usinage de la pièce sur CNC"></video>
+            </div>
+        </div>
+    </section>
 
-</section>
+    <section class="section bg-3d">
+        <div class="glass-card scroll-reveal">
+            <div class="content">
+                <div class="project-date">Hiver 2026</div>
+                <h3>Conception d'un Drone</h3>
+                <p>Modélisation CAO de haut niveau pour l'assemblage complet d'un drone, optimisé pour la fabrication additive (impression 3D). Le défi principal a été l'orientation des structures de support dans le slicer pour garantir l'intégrité structurelle des éléments fins comme les ailes.</p>
+                <div class="tools">
+                    <span class="tool-badge">SolidWorks</span>
+                    <span class="tool-badge">Imprimante 3D (FDM)</span>
+                    <span class="tool-badge">Slicer</span>
+                </div>
+            </div>
+            <div class="media grid-2">
+                <img src="image10.png" alt="Drone CAO">
+                <img src="image11.png" alt="Drone Imprimé">
+                <img src="image12.png" alt="Assemblage Drone" style="grid-column: span 2;">
+            </div>
+        </div>
+    </section>
 
-<!-- MODAL -->
-<div id="modal" class="modal">
-  <span onclick="closeModal()">×</span>
-  <div id="modalContent"></div>
-</div>
+    <section class="section bg-robot">
+        <div class="glass-card reverse-layout scroll-reveal">
+            <div class="content">
+                <div class="project-date">Hiver 2026</div>
+                <h3>Bras Robotique MG996R</h3>
+                <p>Conception complète, de l'assemblage CAO à la préparation finale, d'un bras robotique actionné par des servomoteurs MG996R à couple élevé. Intégration minutieuse des composants électromécaniques en une seule structure multi-axes, avec gestion précise des tolérances pour les ajustements mécaniques et l'articulation des joints.</p>
+                <div class="tools">
+                    <span class="tool-badge">SolidWorks</span>
+                    <span class="tool-badge">Servomoteurs MG996R</span>
+                    <span class="tool-badge">Électronique</span>
+                </div>
+            </div>
+            <div class="media">
+                <img src="image13.png" alt="Bras Robotique">
+            </div>
+        </div>
+    </section>
 
-<section class="contact">
-  <h2>Contact</h2>
-  <p>Email: bondobachir@gmail.com</p>
-  <p>Phone: +1 613 606 7984</p>
-  <a href="https://www.linkedin.com/in/mohammad-bachir-bondo-78308535a" target="_blank">LinkedIn</a>
-</section>
+    <script>
+        // 1. Logique du curseur personnalisé
+        const cursor = document.querySelector('.cursor');
+        const trail = document.querySelector('.cursor-trail');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            // Le petit point (trail) suit avec un léger délai pour un effet fluide
+            setTimeout(() => {
+                trail.style.left = e.clientX + 'px';
+                trail.style.top = e.clientY + 'px';
+            }, 50);
+        });
 
-<script src="script.js"></script>
+        // Agrandir le curseur quand on survole un élément interactif
+        document.querySelectorAll('span.tool-badge, img, video').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                cursor.style.width = '40px';
+                cursor.style.height = '40px';
+                cursor.style.backgroundColor = 'rgba(0, 240, 255, 0.2)';
+            });
+            item.addEventListener('mouseleave', () => {
+                cursor.style.width = '20px';
+                cursor.style.height = '20px';
+                cursor.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // 2. Animation d'apparition au défilement (Scroll Reveal)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.2 // Déclenche l'animation quand 20% de la carte est visible
+        });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
-</html
+</html>
